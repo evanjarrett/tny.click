@@ -1,0 +1,12 @@
+#!/bin/bash
+function uploadImage {
+  curl -H "API-ID: " -H "API-Key: " -s -F "image=@$1" https://tny.click/upload.php
+}
+
+sleep 0.2
+img="/tmp/shot.png"
+gnome-screenshot -af $img
+clip=$(uploadImage $img)
+echo $clip | xclip -selection c
+rm $img
+notify-send "TnyClick $clip" -t 2000
