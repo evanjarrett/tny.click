@@ -1,0 +1,10 @@
+version: '3'
+services:
+  tnyclick:
+    build: .
+    container_name: tnyclick
+    ports:
+     - "8000:8000"
+    volumes:
+     - ./:/src:rw
+

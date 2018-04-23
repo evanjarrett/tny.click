@@ -1,6 +1,6 @@
 #!/bin/bash
 function uploadImage {
-  curl -H "API-ID: " -H "API-Key: " -s -F "image=@$1" https://tny.click/upload.php
+  curl -H "API-ID: " -H "API-Key: " -s -F "file=@$1" http://127.0.0.1:8000/api/images/evan/
 }
 
 sleep 0.2
