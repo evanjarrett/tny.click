@@ -1,7 +1,8 @@
-from django.urls import re_path
+from django.urls import path
 
 from . import views
 
 urlpatterns = [
-    re_path(r'^images/(?P<username>\w+)/$', views.UploadAPIView.as_view()),
+    path('images', views.UploadAPIView.as_view()),
+    path('token', views.TokenAPIView.as_view()),
 ]

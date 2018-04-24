@@ -1,29 +1,43 @@
 from django.http import HttpResponse
 from rest_framework import status
-from rest_framework.permissions import AllowAny
+from rest_framework.authentication import TokenAuthentication, SessionAuthentication
+from rest_framework.authtoken.models import Token
+from rest_framework.generics import RetrieveAPIView, ListCreateAPIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
-from rest_framework.views import APIView
 
 # Create your views here.
 from .models import UploadedImage
 from .serializers import UploadedImageSerializer
 
 
-class UploadAPIView(APIView):
-    permission_classes = (AllowAny,)
+class UploadAPIView(ListCreateAPIView):
+    permission_classes = (IsAuthenticated,)
     renderer_classes = (JSONRenderer,)
+    authentication_classes = (TokenAuthentication,)
 
-    def get(self, request, username):
-        images = UploadedImage.objects.filter(username=username)
+    def get(self, request, **kwargs):
+        images = UploadedImage.objects.filter(username=request.user.username)
         serializer = UploadedImageSerializer(images, many=True)
         return Response(serializer.data)
 
-    def post(self, request, username):
+    def post(self, request, **kwargs):
         image = request.data["file"]
-        serializer = UploadedImageSerializer(data={"image": image, "username": username})
+        serializer = UploadedImageSerializer(data={"image": image, "username": request.user.username})
         if serializer.is_valid():
             serializer.save()
             url = request.build_absolute_uri('/')[:-1]
-            return HttpResponse(url + serializer.data["image"], content_type='text/plain', status=status.HTTP_201_CREATED)
+            return HttpResponse(url + serializer.data["image"], content_type='text/plain',
+                status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class TokenAPIView(RetrieveAPIView):
+    permission_classes = (IsAuthenticated,)
+    renderer_classes = (JSONRenderer,)
+    authentication_classes = (TokenAuthentication, SessionAuthentication)
+
+    def get(self, request, **kwargs):
+        token, bool = Token.objects.get_or_create(user=request.user)
+        return Response({"token": token.key})

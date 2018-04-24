@@ -22,9 +22,7 @@ from . import views
 
 urlpatterns = [
     path('', views.HomePageView.as_view(), name='index'),
-    path('', views.HomePageView.as_view(), name='index'),
-    # path('', RedirectView.as_view(url='static/index.html', permanent=False), name='index'),
-
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
