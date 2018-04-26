@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-docker-compose run --rm frontend "$@"
+docker-compose run --rm yarn "$@"
 sudo chown -R ${USER} .

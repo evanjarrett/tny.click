@@ -69,8 +69,4 @@ venv/
 
 .idea/*
 
-server/f/*
-server/i/*
-*/media/*
-
-tnyclick/media/*
+/media/

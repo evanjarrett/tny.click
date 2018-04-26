@@ -1,6 +1,7 @@
 version: '3'
 
 services:
+
   tnyclick:
     build: .
     container_name: tnyclick
@@ -9,11 +10,18 @@ services:
     volumes:
       - ./:/src:rw
 
-  frontend:
+  react-cli:
     build: react/
     image: react-cli
     container_name: react-cli
+    working_dir: /app/
+    volumes:
+      - ./react:/app:rw
+
+  yarn:
+    build: react/
+    image: react-cli
     working_dir: /app/tnyclick
     volumes:
       - ./react:/app:rw
-      - ./build:/app/tnyclick/build
+      - ./build:/app/tnyclick/build:z
