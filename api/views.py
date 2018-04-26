@@ -15,7 +15,7 @@ from .serializers import UploadedImageSerializer
 class UploadAPIView(ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
     renderer_classes = (JSONRenderer,)
-    authentication_classes = (TokenAuthentication,)
+    authentication_classes = (TokenAuthentication, SessionAuthentication)
 
     def get(self, request, **kwargs):
         images = UploadedImage.objects.filter(username=request.user.username)

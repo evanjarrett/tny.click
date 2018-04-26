@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  tnyclick:
+    build: .
+    container_name: tnyclick
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/src:rw
+
+  frontend:
+    build: react/
+    image: react-cli
+    container_name: react-cli
+    working_dir: /app/tnyclick
+    volumes:
+      - ./react:/app:rw
+      - ./build:/app/tnyclick/build

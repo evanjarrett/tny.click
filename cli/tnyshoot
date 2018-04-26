@@ -1,6 +1,6 @@
 #!/bin/bash
 function uploadImage {
-  curl -H "Authorization: Token fc95c20ec536dd65110715ead6e4c500dc35a88d" -s -F "file=@$1" http://127.0.0.1:8000/api/images
+  curl -H "Authorization: Token 5b9d9885b553c7f5f3a2caacd84467e8b1adefae" -s -F "file=@$1" http://127.0.0.1:8000/api/images
 }
 
 sleep 0.2
