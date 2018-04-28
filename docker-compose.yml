@@ -4,24 +4,19 @@ services:
 
   tnyclick:
     build: .
-    container_name: tnyclick
+    container_name: tnyclick-backend
     ports:
       - "8000:8000"
     volumes:
-      - ./:/src:rw
+      - ./:/src:z
+    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
-  react-cli:
-    build: react/
-    image: react-cli
-    container_name: react-cli
-    working_dir: /app/
+  frontend:
+    build: ./frontend
+    container_name: tnyclick-frontend
+    ports:
+      - "3000:3000"
+    working_dir: /app
     volumes:
-      - ./react:/app:rw
-
-  yarn:
-    build: react/
-    image: react-cli
-    working_dir: /app/tnyclick
-    volumes:
-      - ./react:/app:rw
-      - ./build:/app/tnyclick/build:z
+      - ./frontend:/app:z
+    command: ["yarn", "start"]

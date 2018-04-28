@@ -4,10 +4,8 @@
 
 This is built using react and django.
 
-To build react: `./run.sh yarn build`
-
-To build the final container: `docker-compose build tnyclick`
-
+Currently the server only runs in "development" mode 
+where webpack will hot reload reactjs rather than it being built
 
 
 The reasoning for all the Dockerfiles is because I want to test out react, 

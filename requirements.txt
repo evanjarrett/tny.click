@@ -1,4 +1,5 @@
 Django
 djangorestframework
+django-webpack-loader
 pillow
 gunicorn
