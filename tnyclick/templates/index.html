@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+{% load render_bundle from webpack_loader %}
+<html>
+<body>
+    <app-root></app-root>
+    {% render_bundle 'inline' %}
+    {% render_bundle 'polyfills' %}
+    {% render_bundle 'styles' %}
+    {% render_bundle 'vendor' %}
+    {% render_bundle 'main' %}
+</body>
+</html>
