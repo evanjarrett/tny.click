@@ -3,8 +3,10 @@ FROM node:8.11.1
 RUN mkdir /app
 WORKDIR /app
 ADD . /app
+RUN cd /app
 
-RUN cd /app && yarn install --force
+RUN yarn global add @angular/cli && yarn install --force
+RUN ng set --global packageManager=yarn
 
-EXPOSE 3000
-CMD ["yarn", "start"]
+EXPOSE 4200
+CMD yarn start

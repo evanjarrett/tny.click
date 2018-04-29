@@ -15,8 +15,8 @@ services:
     build: ./frontend
     container_name: tnyclick-frontend
     ports:
-      - "3000:3000"
+      - "4200:4200"
     working_dir: /app
     volumes:
-      - ./frontend:/app:z
+      - ./frontend:/app:rw
     command: ["yarn", "start"]

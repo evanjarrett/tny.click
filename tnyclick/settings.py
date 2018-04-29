@@ -39,8 +39,7 @@ INSTALLED_APPS = [
     'tnyclick',
     'api',
     'rest_framework',
-    'rest_framework.authtoken',
-    'webpack_loader'
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -53,20 +52,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-WEBPACK_LOADER = {
-    'DEFAULT': {
-        'BUNDLE_DIR_NAME': 'bundles/',
-        'STATS_FILE': os.path.join(BASE_DIR, 'frontend', 'webpack-stats.dev.json'),
-    }
-}
-
 ROOT_URLCONF = 'tnyclick.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, "tnyclick", "templates")
+            os.path.join(BASE_DIR, "frontend", "dist")
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -79,10 +71,6 @@ TEMPLATES = [
         },
     },
 ]
-
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'templates'),
-)
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -138,7 +126,7 @@ LOGIN_REDIRECT_URL = '/api/token'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "frontend", "dist"),
 )
 
 STATIC_URL = '/static/'
