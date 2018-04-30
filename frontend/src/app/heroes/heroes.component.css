@@ -1,0 +1,8 @@
+.example-card {
+  max-width: 400px;
+}
+
+.example-header-image {
+  background-image: url('https://raw.githubusercontent.com/00firestar00/tny.site/master/images/tnybot_small.png');
+  background-size: cover;
+}

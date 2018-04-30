@@ -136,6 +136,7 @@ LOGIN_REDIRECT_URL = '/api/token'
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "frontend", "dist"),
+        os.path.join(BASE_DIR, "frontend", "src"),
     os.path.join(BASE_DIR, "static"),
 )
 
