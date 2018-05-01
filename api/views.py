@@ -12,10 +12,16 @@ from .models import UploadedImage
 from .serializers import UploadedImageSerializer
 
 
+class CsrfExemptSessionAuthentication(SessionAuthentication):
+
+    def enforce_csrf(self, request):
+        return  # To not perform the csrf check previously happening
+
+
 class UploadAPIView(ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
     renderer_classes = (JSONRenderer,)
-    authentication_classes = (TokenAuthentication, SessionAuthentication)
+    authentication_classes = (TokenAuthentication, CsrfExemptSessionAuthentication)
 
     def get(self, request, **kwargs):
         images = UploadedImage.objects.filter(username=request.user.username)
