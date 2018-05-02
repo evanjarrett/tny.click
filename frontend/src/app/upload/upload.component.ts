@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {MatDialogRef} from '@angular/material';
 import {FileSystemFileEntry, UploadEvent} from 'ngx-file-drop';
 
@@ -15,7 +15,8 @@ export class UploadComponent implements OnInit {
     constructor(
         public dialogRef: MatDialogRef<UploadComponent>,
         private router: Router,
-        private uploadService: UploadService
+        private uploadService: UploadService,
+        private zone: NgZone
     ) {
     }
 
@@ -46,7 +47,7 @@ export class UploadComponent implements OnInit {
 
     private imageURLReturned(url: string) {
         const rout = url.split("/media/")[1].split(".")[0];
-        this.dialogRef.close();
+        this.zone.run(() => this.dialogRef.close());
         this.router.navigate(['/image', rout]);
     }
 
