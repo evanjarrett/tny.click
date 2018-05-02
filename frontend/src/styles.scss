@@ -1,4 +1,5 @@
 @import '~@angular/material/theming';
+
 @include mat-core();
 $dark-primary: mat-palette($mat-blue, 700, 300, 900);
 $dark-accent: mat-palette($mat-blue-grey, 400);
@@ -24,32 +25,49 @@ $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn); // Include
     background: mat-color($background, background);
   }
 
-  mat-card {
-    max-width: 80%;
-    margin: 2em auto;
-    text-align: center;
-  }
-
-  .fill-remaining-space {
-    flex: 1 1 auto;
-  }
-
-  .done {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    color: white;
-  }
-
-  .upload-zone {
-    width: 400px;
-    height: 400px;
-    margin: auto;
-    border: 2px dotted #0782d0;
-    border-radius: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 }
+
 @include material-dark-theme($dark-theme);
+
+mat-card {
+  max-width: 80%;
+  margin: 2em auto;
+  text-align: center;
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+.done {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: white;
+}
+
+.upload-zone {
+  width: 400px;
+  height: 400px;
+  margin: auto;
+  border: 2px dotted #0782d0;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+app-upload {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .mat-dialog-content {
+    flex: 1;
+  }
+
+  .mat-dialog-actions {
+    align-self: flex-end;
+  }
+
+}

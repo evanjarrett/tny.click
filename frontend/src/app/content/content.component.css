@@ -1,7 +1,8 @@
 mat-drawer-container {
-  height: 100%
+    height: 100%;
 }
+
 .example-header-image {
-  background-image: url('https://raw.githubusercontent.com/00firestar00/tny.site/master/images/tnybot_small.png');
-  background-size: cover;
+    background-image: url('https://raw.githubusercontent.com/00firestar00/tny.site/master/images/tnybot_small.png');
+    background-size: cover;
 }

@@ -1,9 +1,9 @@
 <div>
-  <app-toolbar></app-toolbar>
+    <app-toolbar></app-toolbar>
+    <router-outlet></router-outlet>
+    <app-content *ngIf="show"></app-content>
 
-  <app-content></app-content>
-
-  <span class="done">
+    <span class="done">
     <button mat-fab>
       <mat-icon>check circle</mat-icon>
     </button>

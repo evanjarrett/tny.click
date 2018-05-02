@@ -1,14 +1,15 @@
 <h2 mat-dialog-title>
-  Upload an Image
+    Upload an Image
 </h2>
 
 <mat-dialog-content>
-  <div class="center">
-    <file-drop customstyle="upload-zone" headertext="Drop image here" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
-    </file-drop>
-  </div>
+    <div class="center">
+        <file-drop customstyle="upload-zone" headertext="Drop image here" (onFileDrop)="dropped($event)"
+                   (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+        </file-drop>
+    </div>
 </mat-dialog-content>
 
-<mat-dialog-actions>
-  <button type="button" mat-button (click)="dialogRef.close(false)">Cancel</button>
-</mat-dialog-actions>
+<!--<mat-dialog-actions>-->
+    <!--<button type="button" mat-button (click)="dialogRef.close(false)">Cancel</button>-->
+<!--</mat-dialog-actions>-->
