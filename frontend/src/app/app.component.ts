@@ -16,7 +16,6 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.router.events.subscribe((e) => {
             if (e instanceof NavigationEnd) {
-                debugger;
                 if (e.url === "/") {
                     this.show = true;
                 } else {

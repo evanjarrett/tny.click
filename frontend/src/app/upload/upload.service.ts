@@ -9,13 +9,6 @@ export class UploadService {
 
     private apiUrl = 'api/images';
 
-    private httpOptions = {
-        headers: new HttpHeaders({
-            'Content-Type': 'application/json',
-            // This token is for a local test sqlite db... good luck ;)
-            'Authorization': 'Token 5b9d9885b553c7f5f3a2caacd84467e8b1adefae'
-        })
-    };
 
     constructor(private httpClient: HttpClient) {
     }
@@ -25,7 +18,12 @@ export class UploadService {
         formData.append('file', fileToUpload, fileToUpload.name);
         return this.httpClient
             .post(this.apiUrl, formData, {
-                headers: this.httpOptions, responseType: 'text'
+                headers: new HttpHeaders({
+                    'enctype': 'multipart/form-data',
+                    // This token is for a local test sqlite db... good luck ;)
+                    'Authorization': 'Token 5b9d9885b553c7f5f3a2caacd84467e8b1adefae'
+                }),
+                responseType: 'text'
             })
             .pipe(
                 catchError(UploadService.handleError)
@@ -33,7 +31,7 @@ export class UploadService {
     }
 
     public imageSourceFromId(id: string) {
-        const url = "http://localhost:8000/media/" + id + ".png";
+        return "http://localhost:8000/media/" + id + ".png";
     }
 
     private static handleError(error: HttpErrorResponse) {
