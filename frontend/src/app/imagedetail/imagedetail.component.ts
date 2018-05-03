@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {UploadService} from "../upload/upload.service";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
-import {Subscription} from "rxjs/src/Subscription";
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
     selector: 'app-imagedetail',
