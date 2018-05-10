@@ -60,8 +60,6 @@ WEBPACK_LOADER = {
     }
 }
 
-ROOT_URLCONF = 'tnyclick.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -130,15 +128,17 @@ USE_L10N = True
 
 USE_TZ = True
 
+ROOT_URLCONF = 'tnyclick.urls'
+
 LOGIN_REDIRECT_URL = '/api/token'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
-STATICFILES_DIRS = (
+STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "frontend", "dist"),
-        os.path.join(BASE_DIR, "frontend", "src"),
-    os.path.join(BASE_DIR, "static"),
-)
+    os.path.join(BASE_DIR, "frontend", "src"),
+    os.path.join(BASE_DIR, "static")
+]
 
 STATIC_URL = '/static/'
 
