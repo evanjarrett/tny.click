@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'tnyclick',
     'api',
     'rest_framework',
+    'rest_framework_simplejwt',
     'rest_framework.authtoken',
     'webpack_loader'
 ]
@@ -80,9 +81,19 @@ TEMPLATES = [
 ]
 
 REST_FRAMEWORK = {
+
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer'
+    ],
+
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+        'rest_framework.permissions.IsAuthenticated'
+    ],
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
 }
 
 WSGI_APPLICATION = 'tnyclick.wsgi.application'

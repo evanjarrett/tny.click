@@ -21,7 +21,7 @@ export class UploadService {
                 headers: new HttpHeaders({
                     'enctype': 'multipart/form-data',
                     // This token is for a local test sqlite db... good luck ;)
-                    'Authorization': 'Token 5b9d9885b553c7f5f3a2caacd84467e8b1adefae'
+                    'Authorization': 'Token ' + sessionStorage.getItem("token")
                 }),
                 responseType: 'text'
             })

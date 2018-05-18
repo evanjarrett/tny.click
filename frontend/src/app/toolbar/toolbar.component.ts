@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
+import {LoginService} from "../login/login.service";
 
 @Component({
     selector: 'app-toolbar',
@@ -7,12 +9,23 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
 
-    title = "Tny.Click"
+    public title = "Tny.Click";
+    public hasToken: boolean = false;
 
-    constructor() {
+    constructor(
+        private router: Router,
+        private loginService: LoginService
+    ) {
+        this.loginService.hasToken.subscribe( value => {
+            this.hasToken = value;
+        });
     }
 
     ngOnInit() {
+        this.hasToken = sessionStorage.getItem("token") !== null;
     }
 
+    public navLogin() {
+        this.router.navigate(['/login']);
+    }
 }

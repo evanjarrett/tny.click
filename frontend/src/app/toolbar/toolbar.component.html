@@ -3,4 +3,6 @@
 
     <span class="fill-remaining-space"></span>
 
+    <button mat-button (click)="navLogin()" *ngIf="!hasToken">Login</button>
+
 </mat-toolbar>

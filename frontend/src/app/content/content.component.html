@@ -2,12 +2,18 @@
 
     <mat-drawer mode="side" opened="true">
 
-
     </mat-drawer>
     <mat-drawer-content>
-        <mat-card>
-            <button mat-raised-button color="primary" (click)="openDialog()">Upload Image</button>
-        </mat-card>
+
+        <header class="mat-header">
+            <div class="mat-header-section">
+                <h1 class="mat-h1">Tny.Click</h1>
+                <h2 class="mat-h2">Image Uploading Service</h2>
+
+                <button mat-raised-button color="accent"(click)="navLogin()" *ngIf="!hasToken">Login</button>
+                <button mat-raised-button color="accent" (click)="openDialog()">Upload Image</button>
+            </div>
+        </header>
 
     </mat-drawer-content>
 </mat-drawer-container>

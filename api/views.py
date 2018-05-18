@@ -7,9 +7,6 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
-# Create your views here.
-from rest_framework_jwt.authentication import JSONWebTokenAuthentication
-
 from .models import UploadedImage
 from .serializers import UploadedImageSerializer
 
@@ -23,7 +20,7 @@ class CsrfExemptSessionAuthentication(SessionAuthentication):
 class UploadAPIView(ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
     renderer_classes = (JSONRenderer,)
-    authentication_classes = (TokenAuthentication, CsrfExemptSessionAuthentication)
+    authentication_classes = (TokenAuthentication, CsrfExemptSessionAuthentication,)
 
     def get(self, request, **kwargs):
         images = UploadedImage.objects.filter(username=request.user.username)
@@ -40,12 +37,3 @@ class UploadAPIView(ListCreateAPIView):
                 status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-class TokenAPIView(RetrieveAPIView):
-    permission_classes = (IsAuthenticated,)
-    renderer_classes = (JSONRenderer,)
-    authentication_classes = (JSONWebTokenAuthentication, TokenAuthentication, SessionAuthentication)
-
-    def get(self, request, **kwargs):
-        token, bool = Token.objects.get_or_create(user=request.user)
-        return Response({"token": token.key})

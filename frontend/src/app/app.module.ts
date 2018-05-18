@@ -9,7 +9,9 @@ import {
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
+    MatFormFieldModule,
     MatIconModule,
+    MatInputModule,
     MatListModule,
     MatMenuModule,
     MatToolbarModule,
@@ -25,9 +27,11 @@ import {UploadService} from './upload/upload.service';
 import {ToolbarComponent} from './toolbar/toolbar.component';
 import {ImagedetailComponent} from './imagedetail/imagedetail.component';
 import {LoginComponent} from './login/login.component';
+import {LoginService} from "./login/login.service";
 
 const appRoutes: Routes = [
     {path: 'image/:id', component: ImagedetailComponent},
+    {path: 'login', component: LoginComponent},
 ];
 
 @NgModule({
@@ -42,7 +46,6 @@ const appRoutes: Routes = [
     imports: [
         RouterModule.forRoot(
             appRoutes,
-            // {enableTracing: true} // <-- debugging purposes only
         ),
         BrowserModule,
         BrowserAnimationsModule,
@@ -53,7 +56,9 @@ const appRoutes: Routes = [
         MatButtonModule,
         MatCardModule,
         MatDialogModule,
+        MatFormFieldModule,
         MatIconModule,
+        MatInputModule,
         MatListModule,
         MatMenuModule,
         MatToolbarModule,
@@ -62,7 +67,7 @@ const appRoutes: Routes = [
     exports: [
         RouterModule
     ],
-    providers: [UploadService],
+    providers: [UploadService, LoginService],
     bootstrap: [AppComponent],
     entryComponents: [UploadComponent]
 })
