@@ -1,17 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-
-import {MatDialog} from '@angular/material';
-
-import {UploadComponent} from '../upload/upload.component';
+import {MatDialog} from "@angular/material";
 import {LoginService} from "../login/login.service";
-
+import {LoginComponent} from "../login/login.component";
 
 @Component({
-    selector: 'app-content',
-    templateUrl: './content.component.html',
-    styleUrls: ['./content.component.scss']
+    selector: 'app-login-button',
+    templateUrl: './login-button.component.html',
+    styleUrls: ['./login-button.component.scss']
 })
-export class ContentComponent implements OnInit {
+export class LoginButtonComponent implements OnInit {
 
     public hasToken: boolean = false;
 
@@ -28,12 +25,10 @@ export class ContentComponent implements OnInit {
         this.hasToken = sessionStorage.getItem("token") !== null;
     }
 
-    openDialog(): void {
-        this.dialog.open(UploadComponent, {
-            width: '600px',
-            height: '600px',
+    public openDialog(): void {
+        this.dialog.open(LoginComponent, {
+            width: '400px',
             data: {}
         });
     }
-
 }

@@ -28,6 +28,7 @@ import {ToolbarComponent} from './toolbar/toolbar.component';
 import {ImagedetailComponent} from './imagedetail/imagedetail.component';
 import {LoginComponent} from './login/login.component';
 import {LoginService} from "./login/login.service";
+import { LoginButtonComponent } from './login-button/login-button.component';
 
 const appRoutes: Routes = [
     {path: 'image/:id', component: ImagedetailComponent},
@@ -42,6 +43,7 @@ const appRoutes: Routes = [
         UploadComponent,
         ImagedetailComponent,
         LoginComponent,
+        LoginButtonComponent,
     ],
     imports: [
         RouterModule.forRoot(

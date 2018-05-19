@@ -4,6 +4,8 @@ mat-drawer-container {
 
 .mat-header {
 
+  overflow: hidden;
+
   .mat-header-section {
     padding-top: 60px;
     text-align: center;
@@ -15,7 +17,7 @@ mat-drawer-container {
       margin: 15px 5px;
     }
 
-    button {
+    .button-container {
       margin: 60px 0;
     }
   }

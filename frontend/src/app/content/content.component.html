@@ -10,8 +10,11 @@
                 <h1 class="mat-h1">Tny.Click</h1>
                 <h2 class="mat-h2">Image Uploading Service</h2>
 
-                <button mat-raised-button color="accent"(click)="navLogin()" *ngIf="!hasToken">Login</button>
-                <button mat-raised-button color="accent" (click)="openDialog()">Upload Image</button>
+                <div class="button-container">
+                    <app-login-button></app-login-button>
+                    <button mat-raised-button color="accent" (click)="openDialog()" *ngIf="hasToken">Upload Image
+                    </button>
+                </div>
             </div>
         </header>
 

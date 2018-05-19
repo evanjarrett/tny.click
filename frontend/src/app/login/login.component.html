@@ -1,22 +1,31 @@
-<div fxLayout="row">
+<form fxLayout="column" (ngSubmit)="login()" #loginForm="ngForm">
+    <mat-dialog-content>
+        <div class="mat-dialog-login" fxLayout="row">
+            <div fxFlex="100">
 
-    <mat-card fxFlex="50" fxFlexOffset="25">
-        <mat-card-content>
-            <form fxLayout="column" (ngSubmit)="login()" #loginForm="ngForm">
-                <mat-form-field fxFlex="50">
-                    <input matInput placeholder="Username" [(ngModel)]="loginModel.username" name="username">
-                </mat-form-field>
+                <div fxLayout="column">
+                    <mat-form-field fxFlex="50">
+                        <input matInput placeholder="Username" [(ngModel)]="loginModel.username" name="username">
+                    </mat-form-field>
 
-                <mat-form-field fxFlex="50" class="mat-accent">
-                    <input matInput placeholder="Password" [(ngModel)]="loginModel.password" name="password" [type]="hide ? 'password' : 'text'">
-                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-                </mat-form-field>
+                    <mat-form-field fxFlex="50" fxFlexOffset="15">
+                        <input matInput placeholder="Password" [(ngModel)]="loginModel.password" name="password"
+                               [type]="hide ? 'password' : 'text'">
+                        <mat-icon style="font-size: 100%" matSuffix (click)="hide = !hide">{{hide ? 'visibility' :
+                            'visibility_off'}}
+                        </mat-icon>
+                    </mat-form-field>
 
-                <button mat-raised-button color="primary" type="submit">Login</button>
-            </form>
+                </div>
 
-        </mat-card-content>
+            </div>
+        </div>
+    </mat-dialog-content>
 
-    </mat-card>
+    <mat-dialog-actions>
 
-</div>
+        <button mat-raised-button color="primary" type="submit">Login</button>
+        <button type="button" mat-button (click)="onNoClick()">Cancel</button>
+
+    </mat-dialog-actions>
+</form>
