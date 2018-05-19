@@ -1,6 +1,5 @@
 Django
 djangorestframework
-djangorestframework_simplejwt
 django-webpack-loader
 pillow
 gunicorn

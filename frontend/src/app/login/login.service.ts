@@ -12,7 +12,6 @@ export class LoginService {
 
     private apiUrl = 'api/token';
 
-
     constructor(private httpClient: HttpClient) {
     }
 

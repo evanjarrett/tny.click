@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'tnyclick',
     'api',
     'rest_framework',
-    'rest_framework_simplejwt',
     'rest_framework.authtoken',
     'webpack_loader'
 ]
@@ -91,7 +90,6 @@ REST_FRAMEWORK = {
     ],
 
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
 }
