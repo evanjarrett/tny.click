@@ -22,10 +22,10 @@ export class LoginButtonComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.hasToken = sessionStorage.getItem("token") !== null;
+        this.hasToken = localStorage.getItem("account") !== null;
     }
 
-    public openDialog(): void {
+    public openLoginDialog(): void {
         this.dialog.open(LoginComponent, {
             width: '400px',
             data: {}

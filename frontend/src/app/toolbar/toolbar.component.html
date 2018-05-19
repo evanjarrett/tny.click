@@ -1,8 +1,15 @@
 <mat-toolbar color="primary" class="mat-elevation-z6">
-    <span>{{title}}</span>
+
+    <button mat-button (click)="navigateHome()" >
+        <span>{{title}}</span>
+    </button>
 
     <span class="fill-remaining-space"></span>
 
     <app-login-button></app-login-button>
+    <button mat-button (click)="navigateAccount()" *ngIf="account">
+        <mat-icon>face</mat-icon>
+        Welcome {{account.username}}!
+    </button>
 
 </mat-toolbar>

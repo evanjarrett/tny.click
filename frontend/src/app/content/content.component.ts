@@ -25,7 +25,7 @@ export class ContentComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.hasToken = sessionStorage.getItem("token") !== null;
+        this.hasToken = localStorage.getItem("account") !== null;
     }
 
     openDialog(): void {

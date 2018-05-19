@@ -2,7 +2,7 @@ import {Component, NgZone, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {LoginService} from "./login.service";
 import {LoginModel} from "./login.model";
-import {TokenModel} from "./token.model";
+import {Account} from "../models/account";
 import {MatDialogRef} from "@angular/material";
 
 @Component({
@@ -34,8 +34,8 @@ export class LoginComponent implements OnInit {
             .subscribe(ret => this.onLoginComplete(ret));
     }
 
-    public onLoginComplete(ret: TokenModel): void {
-        sessionStorage.setItem("token", ret.token);
+    public onLoginComplete(ret: Account): void {
+        localStorage.setItem("account",  JSON.stringify(ret));
         this.zone.run(() => this.dialogRef.close());
         this.loginService.hasToken.next(true);
         this.router.navigate(['']);

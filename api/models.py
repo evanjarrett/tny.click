@@ -12,18 +12,20 @@ def scramble_uploaded_filename(instance, filename):
     :param filename:
     :return:
     """
-    extension = filename.split(".")[-1]
-    return "{}.{}".format(uuid.uuid4().hex[:12], extension)
+    return "{}.{}".format(instance.name, instance.extension)
 
 
 # Create your models here.
 
-# Our main model: Uploaded Image
 class UploadedImage(models.Model):
     username = models.CharField("username", max_length=100)
+    extension = models.CharField("extension", max_length=10, null=True, blank=True)
+    name = models.CharField("name", max_length=20, null=True, blank=True)
     image = models.ImageField("image", upload_to=scramble_uploaded_filename)
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        self.extension = self.image.url.split(".")[-1]
+        self.name = uuid.uuid4().hex[:12]
         super(UploadedImage, self).save(force_update=force_update)
 
 

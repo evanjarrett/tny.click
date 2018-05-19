@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from "rxjs/Observable";
 import {LoginModel} from "./login.model";
-import {TokenModel} from "./token.model";
+import {Account} from "../models/account";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 
 @Injectable()
@@ -15,9 +15,9 @@ export class LoginService {
     constructor(private httpClient: HttpClient) {
     }
 
-    public login(login: LoginModel): Observable<TokenModel> {
+    public login(login: LoginModel): Observable<Account> {
         return this.httpClient
-            .post<TokenModel>(this.apiUrl, login)
+            .post<Account>(this.apiUrl, login)
     }
 
 }
