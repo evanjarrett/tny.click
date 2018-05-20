@@ -20,7 +20,7 @@ def scramble_uploaded_filename(instance, filename):
 class UploadedImage(models.Model):
     username = models.CharField("username", max_length=100)
     extension = models.CharField("extension", max_length=10, null=True, blank=True)
-    name = models.CharField("name", max_length=20, null=True, blank=True)
+    name = models.CharField("name", max_length=20, unique=True, null=True, blank=True)
     image = models.ImageField("image", upload_to=scramble_uploaded_filename)
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):

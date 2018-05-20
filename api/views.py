@@ -1,31 +1,20 @@
 from django.http import HttpResponse
 from rest_framework import status
-from rest_framework.authentication import TokenAuthentication, SessionAuthentication
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.decorators import permission_classes
 from rest_framework.exceptions import PermissionDenied
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveAPIView
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
 from .models import UploadedImage
 from .serializers import UploadedImageSerializer
 
 
-class CsrfExemptSessionAuthentication(SessionAuthentication):
-
-    def enforce_csrf(self, request):
-        return  # To not perform the csrf check previously happening
-
-
 class UploadAPIView(ListCreateAPIView):
-    permission_classes = (IsAuthenticated,)
-    renderer_classes = (JSONRenderer,)
-    authentication_classes = (TokenAuthentication, CsrfExemptSessionAuthentication,)
 
-    def get(self, request, **kwargs):
+    def get(self, request):
         images = UploadedImage.objects.filter(username=request.user.username)
         serializer = UploadedImageSerializer(images, many=True)
         return Response(serializer.data)
@@ -41,20 +30,25 @@ class UploadAPIView(ListCreateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class ImageAPIView(RetrieveAPIView):
+
+    def get(self, request, name):
+        image = UploadedImage.objects.get(name=name)
+        serializer = UploadedImageSerializer(image, many=False)
+        return Response(serializer.data)
+
+
 class TokenAPIView(ObtainAuthToken):
 
-    renderer_classes = (JSONRenderer,)
-    authentication_classes = (TokenAuthentication, CsrfExemptSessionAuthentication,)
-
-    @permission_classes((IsAuthenticated, ))
-    def get(self, request, *args, **kwargs):
+    @permission_classes((IsAuthenticated,))
+    def get(self, request):
         if not request.user.is_authenticated or request.user.is_anonymous:
             raise PermissionDenied
 
         token, bool = Token.objects.get_or_create(user=request.user)
         return Response({"token": token.key})
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         serializer = self.serializer_class(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
