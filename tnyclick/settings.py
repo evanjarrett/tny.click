@@ -19,10 +19,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '@u=@!5o+o^0@hg=x6(y(#3av667z*vcm85(a8j7eaxf5=u-mu*'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '@u=@!5o+o^0@hg=x6(y(#3av667z*vcm85(a8j7eaxf5=u-mu*')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG') == 'True'
+print("[DEBUG] {}".format(DEBUG))
 
 ALLOWED_HOSTS = []
 
@@ -145,13 +145,11 @@ LOGIN_REDIRECT_URL = '/api/token'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "frontend", "dist"),
-    os.path.join(BASE_DIR, "frontend", "src"),
-    os.path.join(BASE_DIR, "static")
+    os.path.join(BASE_DIR, "frontend", "dist")
 ]
 
-STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "dist")
+STATIC_URL = '/dist/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-
 MEDIA_URL = '/i/'

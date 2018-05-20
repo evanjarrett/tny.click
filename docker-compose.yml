@@ -9,7 +9,9 @@ services:
       - "8000:8000"
     volumes:
       - ./:/src:z
-    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+    environment:
+      - DJANGO_DEBUG=True
+    command: gunicorn tnyclick.wsgi -b 0.0.0.0:8000 --workers 3
 
   frontend:
     user: $UID
@@ -20,4 +22,4 @@ services:
     working_dir: /app
     volumes:
       - ./frontend:/app:rw
-    command: ["yarn", "start"]
+    command: yarn start
