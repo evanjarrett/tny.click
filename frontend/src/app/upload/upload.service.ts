@@ -4,25 +4,26 @@ import {catchError} from 'rxjs/operators/catchError';
 import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import {Observable} from "rxjs/Observable";
 import {Account} from "../models/account";
+import {Image} from "../models/image";
 
 @Injectable()
 export class UploadService {
 
-    private apiUrl = 'api/images';
-    private account : Account;
+    private account: Account;
 
-    constructor(private httpClient: HttpClient) {
+    constructor(
+        private httpClient: HttpClient
+    ) {
+        this.account = JSON.parse(localStorage.getItem("account"));
     }
 
-    public postFile(fileToUpload: File): Observable<string> {
+    public postImage(fileToUpload: File): Observable<string> {
         const formData: FormData = new FormData();
         formData.append('file', fileToUpload, fileToUpload.name);
-        this.account = JSON.parse(localStorage.getItem("account"));
         return this.httpClient
-            .post(this.apiUrl, formData, {
+            .post("api/images", formData, {
                 headers: new HttpHeaders({
                     'enctype': 'multipart/form-data',
-                    // This token is for a local test sqlite db... good luck ;)
                     'Authorization': 'Token ' + this.account.token
                 }),
                 responseType: 'text'
@@ -32,8 +33,16 @@ export class UploadService {
             );
     }
 
-    public imageSourceFromId(id: string) {
-        return "http://localhost:8000/media/" + id + ".png";
+    public getImage(id: string): Observable<Image> {
+        return this.httpClient
+            .get("api/image/" + id, {
+                headers: new HttpHeaders({
+                    'Authorization': 'Token ' + this.account.token
+                })
+            })
+            .pipe(
+                catchError(UploadService.handleError)
+            );
     }
 
     private static handleError(error: HttpErrorResponse) {

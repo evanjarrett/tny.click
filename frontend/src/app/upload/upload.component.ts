@@ -38,7 +38,7 @@ export class UploadComponent implements OnInit {
                     // Here you can access the real file
                     console.log(file.name, file);
 
-                    this.uploadService.postFile(file)
+                    this.uploadService.postImage(file)
                         .subscribe(url => this.imageURLReturned(url));
                 });
             }
@@ -46,7 +46,7 @@ export class UploadComponent implements OnInit {
     }
 
     private imageURLReturned(url: string) {
-        const rout = url.split("/media/")[1].split(".")[0];
+        const rout = url.split("/").pop().split(".")[0];
         this.zone.run(() => this.dialogRef.close());
         this.router.navigate(['/image', rout]);
     }

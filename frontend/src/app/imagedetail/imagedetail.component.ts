@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {UploadService} from "../upload/upload.service";
 import {Subscription} from "rxjs/Subscription";
+import {Image} from "../models/image";
 
 @Component({
     selector: 'app-imagedetail',
@@ -9,7 +10,7 @@ import {Subscription} from "rxjs/Subscription";
     styleUrls: ['./imagedetail.component.css']
 })
 export class ImagedetailComponent implements OnInit {
-    private image_url: string;
+    private image: Image;
     private sub: Subscription;
 
     constructor(
@@ -21,7 +22,15 @@ export class ImagedetailComponent implements OnInit {
 
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
-            this.image_url = this.service.imageSourceFromId(params.id);
+            this.service.getImage(params.id).subscribe(
+                (data: Image) => {
+                    this.image = data
+                }
+            )
         });
+    }
+
+    openRaw() {
+        window.open(this.image.image, '_blank');
     }
 }
