@@ -10,7 +10,7 @@ services:
     volumes:
       - ./:/src:z
     environment:
-      - DJANGO_DEBUG=False
+      - DJANGO_DEBUG=True
     command: gunicorn tnyclick.wsgi -b 0.0.0.0:8000 --workers 3
 
   frontend:
