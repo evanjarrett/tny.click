@@ -1,5 +1,5 @@
 Django
 djangorestframework
-django-webpack-loader
+django-cors-headers
 pillow
 gunicorn

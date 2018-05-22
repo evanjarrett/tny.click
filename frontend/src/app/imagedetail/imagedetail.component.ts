@@ -33,4 +33,11 @@ export class ImagedetailComponent implements OnInit {
     openRaw() {
         window.open(this.image.image, '_blank');
     }
+
+    public getImageURL(): string {
+        if (this.image) {
+            return "http://localhost:8000" + this.image.image;
+        }
+        return "";
+    }
 }

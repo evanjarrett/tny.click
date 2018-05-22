@@ -21,10 +21,19 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '@u=@!5o+o^0@hg=x6(y(#3av667z*vcm85(a8j7eaxf5=u-mu*')
 
-DEBUG = os.environ.get('DJANGO_DEBUG') == 'True'
+DEBUG = True  # os.environ.get('DJANGO_DEBUG') == 'True'
 print("[DEBUG] {}".format(DEBUG))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "localhost",
+    "tny.click"
+]
+
+CORS_ORIGIN_WHITELIST = [
+    "localhost:4200",
+    "localhost:8000",
+    "tny.click"
+]
 
 # Application definition
 
@@ -37,13 +46,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'tnyclick',
-    'api',
+    'tnyclick.api',
     'rest_framework',
     'rest_framework.authtoken',
-    'webpack_loader'
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -52,13 +62,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-WEBPACK_LOADER = {
-    'DEFAULT': {
-        'BUNDLE_DIR_NAME': '',
-        'STATS_FILE': os.path.join(BASE_DIR, 'frontend', 'webpack-stats.json'),
-    }
-}
 
 TEMPLATES = [
     {
@@ -91,7 +94,7 @@ REST_FRAMEWORK = {
 
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
-        'api.authentication.CsrfExemptSessionAuthentication',
+        'tnyclick.api.authentication.CsrfExemptSessionAuthentication',
     ),
 }
 
@@ -145,11 +148,11 @@ LOGIN_REDIRECT_URL = '/api/token'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "frontend", "dist")
+    os.path.join(BASE_DIR, "dist"),
+    os.path.join(BASE_DIR, "static")
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, "dist")
-STATIC_URL = '/dist/'
+STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = '/i/'

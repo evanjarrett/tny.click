@@ -21,9 +21,8 @@ export class UploadService {
         const formData: FormData = new FormData();
         formData.append('file', fileToUpload, fileToUpload.name);
         return this.httpClient
-            .post("api/images", formData, {
+            .post("http://localhost:8000/api/images", formData, {
                 headers: new HttpHeaders({
-                    'enctype': 'multipart/form-data',
                     'Authorization': 'Token ' + this.account.token
                 }),
                 responseType: 'text'
@@ -35,7 +34,7 @@ export class UploadService {
 
     public getImage(id: string): Observable<Image> {
         return this.httpClient
-            .get("api/image/" + id, {
+            .get("http://localhost:8000/api/image/" + id, {
                 headers: new HttpHeaders({
                     'Authorization': 'Token ' + this.account.token
                 })

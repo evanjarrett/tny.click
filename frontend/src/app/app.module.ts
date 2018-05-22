@@ -3,7 +3,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
 import {RouterModule, Routes} from '@angular/router';
 import {
     MatButtonModule,
@@ -55,6 +55,10 @@ const appRoutes: Routes = [
         FlexLayoutModule,
         FormsModule,
         HttpClientModule,
+        HttpClientXsrfModule.withOptions({
+            cookieName: 'csrftoken',
+            headerName: 'X-CSRFToken'
+        }),
         MatButtonModule,
         MatCardModule,
         MatDialogModule,

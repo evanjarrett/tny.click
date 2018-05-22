@@ -10,7 +10,7 @@ export class LoginService {
 
     public hasToken: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-    private apiUrl = 'api/token';
+    private apiUrl = 'http://localhost:8000/api/token';
 
     constructor(private httpClient: HttpClient) {
     }
