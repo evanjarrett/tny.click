@@ -5,7 +5,7 @@ WORKDIR /app
 ADD . /app
 RUN cd /app
 
-RUN yarn global add @angular/cli@1.7.4
+RUN yarn global add @angular/cli@6.0.3
 RUN yarn install --force
 RUN ng set --global packageManager=yarn
 

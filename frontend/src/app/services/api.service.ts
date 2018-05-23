@@ -1,13 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {catchError} from 'rxjs/operators/catchError';
-import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
-import {Observable} from "rxjs/Observable";
+import {catchError} from 'rxjs/operators';
+import {BehaviorSubject, Observable} from "rxjs";
 import {Account} from "../models/account";
-import {Image} from "../models/image";
 import {LoginModel} from "../login/login.model";
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {environment} from "../../environments/environment";
+import {throwError} from "rxjs/internal/observable/throwError";
 
 @Injectable()
 export class ApiService {
@@ -49,7 +47,7 @@ export class ApiService {
             );
     }
 
-    public getImage(id: string): Observable<Image> {
+    public getImage(id: string): Observable<any> {
         return this.httpClient
             .get(this.imageUrl + "/" + id, {
                 headers: new HttpHeaders({
@@ -61,7 +59,7 @@ export class ApiService {
             );
     }
 
-    private static handleError(error: HttpErrorResponse): ErrorObservable {
+    private static handleError(error: HttpErrorResponse) {
         if (error.error instanceof ErrorEvent) {
             // A client-side or network error occurred. Handle it accordingly.
             console.error('An error occurred:', error.error.message);
@@ -72,8 +70,8 @@ export class ApiService {
                 `Backend returned code ${error.status}, ` +
                 `body was: ${error.error}`);
         }
-        // return an ErrorObservable with a user-facing error message
-        return new ErrorObservable(
+        // return an observable with a user-facing error message
+        return throwError(
             'Something bad happened; please try again later.');
     };
 
