@@ -1,9 +1,8 @@
 import {Component, NgZone, OnInit} from '@angular/core';
 import {MatDialogRef} from '@angular/material';
 import {FileSystemFileEntry, UploadEvent} from 'ngx-file-drop';
-
-import {UploadService} from './upload.service';
 import {Router} from "@angular/router";
+import {ApiService} from "../services/api.service";
 
 @Component({
     selector: 'app-upload',
@@ -15,7 +14,7 @@ export class UploadComponent implements OnInit {
     constructor(
         public dialogRef: MatDialogRef<UploadComponent>,
         private router: Router,
-        private uploadService: UploadService,
+        private service: ApiService,
         private zone: NgZone
     ) {
     }
@@ -38,7 +37,7 @@ export class UploadComponent implements OnInit {
                     // Here you can access the real file
                     console.log(file.name, file);
 
-                    this.uploadService.postImage(file)
+                    this.service.postImage(file)
                         .subscribe(url => this.imageURLReturned(url));
                 });
             }

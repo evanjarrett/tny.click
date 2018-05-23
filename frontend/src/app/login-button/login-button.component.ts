@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material";
-import {LoginService} from "../login/login.service";
 import {LoginComponent} from "../login/login.component";
+import {ApiService} from "../services/api.service";
 
 @Component({
     selector: 'app-login-button',
@@ -14,9 +14,9 @@ export class LoginButtonComponent implements OnInit {
 
     constructor(
         public dialog: MatDialog,
-        private loginService: LoginService
+        private service: ApiService
     ) {
-        this.loginService.hasToken.subscribe(value => {
+        this.service.hasToken.subscribe(value => {
             this.hasToken = value;
         });
     }

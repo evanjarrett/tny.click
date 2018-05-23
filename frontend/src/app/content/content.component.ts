@@ -3,7 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 
 import {UploadComponent} from '../upload/upload.component';
-import {LoginService} from "../login/login.service";
+import {ApiService} from "../services/api.service";
 
 
 @Component({
@@ -17,9 +17,9 @@ export class ContentComponent implements OnInit {
 
     constructor(
         public dialog: MatDialog,
-        private loginService: LoginService
+        private service: ApiService
     ) {
-        this.loginService.hasToken.subscribe(value => {
+        this.service.hasToken.subscribe(value => {
             this.hasToken = value;
         });
     }

@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {UploadService} from "../upload/upload.service";
 import {Subscription} from "rxjs/Subscription";
 import {Image} from "../models/image";
+import {environment} from "../../environments/environment";
+import {ApiService} from "../services/api.service";
 
 @Component({
     selector: 'app-imagedetail',
@@ -16,7 +17,7 @@ export class ImagedetailComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private service: UploadService
+        private service: ApiService
     ) {
     }
 
@@ -31,12 +32,12 @@ export class ImagedetailComponent implements OnInit {
     }
 
     openRaw() {
-        window.open(this.image.image, '_blank');
+        window.open(this.getImageURL(), '_blank');
     }
 
     public getImageURL(): string {
         if (this.image) {
-            return "http://localhost:8000" + this.image.image;
+            return environment.apiUrl + this.image.image;
         }
         return "";
     }

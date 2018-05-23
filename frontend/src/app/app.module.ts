@@ -14,8 +14,8 @@ import {
     MatInputModule,
     MatListModule,
     MatMenuModule,
-    MatToolbarModule,
     MatSidenavModule,
+    MatToolbarModule,
 } from '@angular/material';
 
 import {FileDropModule} from 'ngx-file-drop';
@@ -23,12 +23,11 @@ import {FileDropModule} from 'ngx-file-drop';
 import {AppComponent} from './app.component';
 import {ContentComponent} from './content/content.component';
 import {UploadComponent} from './upload/upload.component';
-import {UploadService} from './upload/upload.service';
 import {ToolbarComponent} from './toolbar/toolbar.component';
 import {ImagedetailComponent} from './imagedetail/imagedetail.component';
 import {LoginComponent} from './login/login.component';
-import {LoginService} from "./login/login.service";
-import { LoginButtonComponent } from './login-button/login-button.component';
+import {LoginButtonComponent} from './login-button/login-button.component';
+import {ApiService} from "./services/api.service";
 
 const appRoutes: Routes = [
     {path: 'image/:id', component: ImagedetailComponent},
@@ -73,7 +72,7 @@ const appRoutes: Routes = [
     exports: [
         RouterModule
     ],
-    providers: [UploadService, LoginService],
+    providers: [ApiService],
     bootstrap: [AppComponent],
     entryComponents: [UploadComponent]
 })
