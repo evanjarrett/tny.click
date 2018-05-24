@@ -26,13 +26,15 @@ print("[DEBUG] {}".format(DEBUG))
 
 ALLOWED_HOSTS = [
     "localhost",
-    "tny.click"
+    "tny.click",
+    "api.tny.click"
 ]
 
 CORS_ORIGIN_WHITELIST = [
     "localhost:4200",
     "localhost:8000",
-    "tny.click"
+    "tny.click",
+    "api.tny.click"
 ]
 
 # Application definition
