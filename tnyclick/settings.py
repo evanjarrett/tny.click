@@ -148,10 +148,10 @@ LOGIN_REDIRECT_URL = '/api/token'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "dist"),
-    os.path.join(BASE_DIR, "static")
+    os.path.join(BASE_DIR, "frontend", "dist")
 ]
 
+STATIC_ROOT = os.path.join(BASE_DIR, "dist")
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")

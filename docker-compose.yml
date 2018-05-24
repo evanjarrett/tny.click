@@ -15,7 +15,7 @@ services:
     command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
   frontend:
-    user: $UID
+    user: node
     build: ./frontend
     container_name: tnyclick-frontend
     ports:

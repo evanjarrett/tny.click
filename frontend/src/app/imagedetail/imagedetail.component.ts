@@ -11,7 +11,7 @@ import {ApiService} from "../services/api.service";
     styleUrls: ['./imagedetail.component.css']
 })
 export class ImagedetailComponent implements OnInit {
-    private image: Image;
+    image: Image;
     private sub: Subscription;
 
     constructor(

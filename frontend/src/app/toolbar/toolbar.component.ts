@@ -9,8 +9,8 @@ import {Account} from "../models/account";
 })
 export class ToolbarComponent implements OnInit {
 
-    public title = "Tny.Click";
-    private account: Account;
+    title = "Tny.Click";
+    account: Account;
 
     constructor(
         private router: Router

@@ -12,7 +12,8 @@ import {ApiService} from "../services/api.service";
 })
 export class LoginComponent implements OnInit {
 
-    public loginModel = new LoginModel();
+    loginModel = new LoginModel();
+    hide = true;
 
     constructor(
         private router: Router,
