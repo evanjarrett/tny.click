@@ -1,5 +1,5 @@
 from django.contrib.auth import login
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -15,7 +15,7 @@ from .serializers import UploadedImageSerializer
 
 class UploadAPIView(ListCreateAPIView):
 
-    def get(self, request):
+    def get(self, request, **kwargs):
         images = UploadedImage.objects.filter(username=request.user.username)
         serializer = UploadedImageSerializer(images, many=True)
         return Response(serializer.data)
@@ -33,8 +33,12 @@ class UploadAPIView(ListCreateAPIView):
 
 class ImageAPIView(RetrieveAPIView):
 
-    def get(self, request, name):
-        image = UploadedImage.objects.get(name=name)
+    def get(self, request, name, **kwargs):
+        try:
+            image = UploadedImage.objects.get(name=name)
+        except UploadedImage.DoesNotExist:
+            return HttpResponseNotFound("Image could not be found")
+
         serializer = UploadedImageSerializer(image, many=False)
         return Response(serializer.data)
 
@@ -49,7 +53,7 @@ class TokenAPIView(ObtainAuthToken):
         token, bool = Token.objects.get_or_create(user=request.user)
         return Response({"token": token.key})
 
-    def post(self, request):
+    def post(self, request, **kwargs):
         serializer = self.serializer_class(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']

@@ -6,6 +6,7 @@ import {Account} from "../models/account";
 import {LoginModel} from "../login/login.model";
 import {environment} from "../../environments/environment";
 import {throwError} from "rxjs/internal/observable/throwError";
+import {Image} from "../models/image";
 
 @Injectable()
 export class ApiService {
@@ -47,9 +48,9 @@ export class ApiService {
             );
     }
 
-    public getImage(id: string): Observable<any> {
+    public getImage(id: string): Observable<Image> {
         return this.httpClient
-            .get(this.imageUrl + "/" + id, {
+            .get<Image>(this.imageUrl + "/" + id, {
                 headers: new HttpHeaders({
                     'Authorization': 'Token ' + this.account.token
                 })
@@ -68,11 +69,10 @@ export class ApiService {
             // The response body may contain clues as to what went wrong,
             console.error(
                 `Backend returned code ${error.status}, ` +
-                `body was: ${error.error}`);
+                `status message: ${error.statusText}`);
         }
         // return an observable with a user-facing error message
-        return throwError(
-            'Something bad happened; please try again later.');
+        return throwError(error);
     };
 
 }

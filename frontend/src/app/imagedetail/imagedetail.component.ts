@@ -4,6 +4,7 @@ import {Subscription} from "rxjs";
 import {Image} from "../models/image";
 import {environment} from "../../environments/environment";
 import {ApiService} from "../services/api.service";
+import {MatSnackBar} from "@angular/material";
 
 @Component({
     selector: 'app-imagedetail',
@@ -17,7 +18,8 @@ export class ImagedetailComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private service: ApiService
+        private service: ApiService,
+        private snackBar: MatSnackBar
     ) {
     }
 
@@ -26,7 +28,8 @@ export class ImagedetailComponent implements OnInit {
             this.service.getImage(params.id).subscribe(
                 (data: Image) => {
                     this.image = data
-                }
+                },
+                error => this.handleError(error)
             )
         });
     }
@@ -40,5 +43,12 @@ export class ImagedetailComponent implements OnInit {
             return environment.apiUrl + this.image.image;
         }
         return "";
+    }
+
+    public handleError(error: any) {
+        this.router.navigate(["/"]);
+        this.snackBar.open(error.error, null, {
+            duration: 3000
+        });
     }
 }

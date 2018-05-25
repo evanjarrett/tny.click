@@ -14,6 +14,7 @@ import {
     MatInputModule,
     MatListModule,
     MatMenuModule,
+    MatSnackBarModule,
     MatSidenavModule,
     MatToolbarModule,
 } from '@angular/material';
@@ -66,8 +67,9 @@ const appRoutes: Routes = [
         MatInputModule,
         MatListModule,
         MatMenuModule,
-        MatToolbarModule,
+        MatSnackBarModule,
         MatSidenavModule,
+        MatToolbarModule,
     ],
     exports: [
         RouterModule
