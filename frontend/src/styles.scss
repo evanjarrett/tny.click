@@ -25,6 +25,10 @@ $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn); // Include
     background: mat-color($background, background);
   }
 
+  .dark-mat-warn {
+    color: mat-color($warn);
+  }
+
 }
 
 @include material-dark-theme($dark-theme);

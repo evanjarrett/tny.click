@@ -1,20 +1,35 @@
-<form fxLayout="column" (ngSubmit)="login()" #loginForm="ngForm">
+<form [formGroup]="loginForm" (ngSubmit)="login()" fxLayout="column">
     <mat-dialog-content>
         <div class="mat-dialog-login" fxLayout="row">
             <div fxFlex="100">
 
                 <div fxLayout="column">
-                    <mat-form-field fxFlex="50">
-                        <input matInput placeholder="Username" [(ngModel)]="loginModel.username" name="username">
+                    <mat-form-field class="form-group" fxFlex="50">
+                        <input matInput
+                               placeholder="Username"
+                               class="form-control"
+                               formControlName="username">
+
+                        <mat-error *ngIf="loginForm.get('username').invalid">{{getRequiredMessage()}}</mat-error>
+
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="50" fxFlexOffset="15">
-                        <input matInput placeholder="Password" [(ngModel)]="loginModel.password" name="password"
+                    <mat-form-field class="form-group" fxFlex="50" fxFlexOffset="15">
+                        <input matInput placeholder="Password"
+                               class="form-control"
+                               formControlName="password"
                                [type]="hide ? 'password' : 'text'">
-                        <mat-icon style="font-size: 100%" matSuffix (click)="hide = !hide">{{hide ? 'visibility' :
-                            'visibility_off'}}
+
+                        <mat-error *ngIf="loginForm.get('password').invalid">{{getRequiredMessage()}}</mat-error>
+
+                        <mat-icon style="font-size: 100%" matSuffix (click)="hide = !hide">
+                            {{hide ? 'visibility' : 'visibility_off'}}
                         </mat-icon>
                     </mat-form-field>
+
+                    <span [hidden]="!errorMessage.length" class="dark-mat-warn">
+                        {{getErrorMessage()}}
+                    </span>
 
                 </div>
 
