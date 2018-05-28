@@ -1,7 +1,6 @@
 <div class="upload center" fxLayout="column">
     <dropzone fxLayout="column" fxLayoutAlign="start stretch" fxFlex="auto"
               [config]="config"
-              [message]="'Click or drop images here to upload'"
               (success)="imageURLReturned($event)">
     </dropzone>
 </div>

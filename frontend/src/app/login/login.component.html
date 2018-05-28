@@ -27,7 +27,7 @@
                         </mat-icon>
                     </mat-form-field>
 
-                    <span [hidden]="!errorMessage.length" class="dark-mat-warn">
+                    <span [hidden]="!getErrorMessage().length" class="dark-mat-warn">
                         {{getErrorMessage()}}
                     </span>
 
