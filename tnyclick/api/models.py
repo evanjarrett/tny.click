@@ -5,7 +5,7 @@ from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
 
 
-def scramble_uploaded_filename(instance):
+def scramble_uploaded_filename(instance, unused):
     """
     Scramble / uglify the filename of the uploaded file, but keep the files extension (e.g., .jpg or .png)
     :param instance:

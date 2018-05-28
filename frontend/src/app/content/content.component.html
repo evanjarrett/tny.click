@@ -1,9 +1,9 @@
-<mat-drawer-container class="example-container">
+<mat-drawer-container class="example-container" fxLayout="column" fxLayoutAlign=" stretch">
 
-    <mat-drawer mode="side" opened="true">
+    <mat-drawer mode="side">
 
     </mat-drawer>
-    <mat-drawer-content>
+    <mat-drawer-content fxLayout="column" fxLayoutAlign="stretch">
 
         <header class="mat-header">
             <div class="mat-header-section">
@@ -17,6 +17,7 @@
                 </div>
             </div>
         </header>
+        <app-upload></app-upload>
 
     </mat-drawer-content>
 </mat-drawer-container>

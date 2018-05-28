@@ -1,8 +1,7 @@
 import {Component, NgZone, OnInit} from '@angular/core';
-import {MatDialogRef} from '@angular/material';
-import {FileSystemFileEntry, UploadEvent} from 'ngx-file-drop';
 import {Router} from "@angular/router";
 import {ApiService} from "../services/api.service";
+import {DropzoneConfigInterface} from "ngx-dropzone-wrapper";
 
 @Component({
     selector: 'app-upload',
@@ -11,51 +10,28 @@ import {ApiService} from "../services/api.service";
 })
 export class UploadComponent implements OnInit {
 
+    config: DropzoneConfigInterface;
+
     constructor(
-        public dialogRef: MatDialogRef<UploadComponent>,
         private router: Router,
         private service: ApiService,
         private zone: NgZone
     ) {
+        this.config = {
+            url: this.service.getUploadURL(),
+            headers: this.service.getTokenHeader(),
+            acceptedFiles: 'image/*'
+        };
+        this.config.headers["Cache-Control"] = "";
+        this.config.headers["X-Requested-With"] = "";
     }
 
     ngOnInit() {
     }
 
-    onNoClick(): void {
-        this.dialogRef.close();
-    }
-
-    public dropped(event: UploadEvent) {
-        for (const droppedFile of event.files) {
-
-            // Is it a file?
-            if (droppedFile.fileEntry.isFile) {
-                const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
-                fileEntry.file((file: File) => {
-
-                    // Here you can access the real file
-                    console.log(file.name, file);
-
-                    this.service.postImage(file)
-                        .subscribe(url => this.imageURLReturned(url));
-                });
-            }
-        }
-    }
-
-    private imageURLReturned(url: string) {
+    imageURLReturned(event) {
+        const url = event[1];
         const rout = url.split("/").pop().split(".")[0];
-        this.zone.run(() => this.dialogRef.close());
-        this.router.navigate(['/image', rout]);
+        this.zone.run(() => this.router.navigate(['/image', rout]));
     }
-
-    public fileOver(event) {
-        console.log("fileOver:", event);
-    }
-
-    public fileLeave(event) {
-        console.log("fileLeave:", event);
-    }
-
 }

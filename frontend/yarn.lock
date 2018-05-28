@@ -482,6 +482,10 @@ amqplib@^0.5.2:
     readable-stream "1.x >=1.1.9"
     safe-buffer "^5.0.1"
 
+angular-file@^0.5.4:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/angular-file/-/angular-file-0.5.4.tgz#03c9bca79ee4f9163b675d27118e90b048193d91"
+
 ansi-html@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/ansi-html/-/ansi-html-0.0.7.tgz#813584021962a9e9e6fd039f940d12f56ca7859e"
@@ -1886,6 +1890,10 @@ domutils@1.5.1:
 double-ended-queue@^2.1.0-0:
   version "2.1.0-0"
   resolved "https://registry.yarnpkg.com/double-ended-queue/-/double-ended-queue-2.1.0-0.tgz#103d3527fd31528f40188130c841efdd78264e5c"
+
+dropzone@^5.4.0:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/dropzone/-/dropzone-5.4.0.tgz#3290c07f59b189eb5a11e99a58c9b2adae5acfec"
 
 duplexify@^3.4.2, duplexify@^3.6.0:
   version "3.6.0"
@@ -4196,6 +4204,12 @@ netmask@^1.0.6:
 next-tick@1:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
+
+ngx-dropzone-wrapper@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/ngx-dropzone-wrapper/-/ngx-dropzone-wrapper-6.1.0.tgz#6a0baa4730b1757e1c424fe215deed3db24ddbee"
+  dependencies:
+    dropzone "^5.4.0"
 
 ngx-file-drop@^4.0.4:
   version "4.0.4"

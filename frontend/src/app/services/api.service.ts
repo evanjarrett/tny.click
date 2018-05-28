@@ -25,12 +25,30 @@ export class ApiService {
         this.account = JSON.parse(localStorage.getItem("account"));
     }
 
+    public getTokenHeader() {
+        return {
+            'Authorization': 'Token ' + this.account.token,
+        }
+    }
+
+    public getUploadURL() {
+        return this.imagesUrl;
+    }
+
     public login(login: LoginModel): Observable<Account> {
-        return this.httpClient
+        const observe_account = this.httpClient
             .post<Account>(this.tokenUrl, login)
             .pipe(
                 catchError(ApiService.handleError)
             );
+        observe_account.subscribe(
+            ret => {
+                this.account = ret;
+                localStorage.setItem("account", JSON.stringify(ret))
+            }
+        );
+        this.hasToken.next(true);
+        return observe_account;
     }
 
     public postImage(fileToUpload: File): Observable<string> {
@@ -38,9 +56,7 @@ export class ApiService {
         formData.append('file', fileToUpload, fileToUpload.name);
         return this.httpClient
             .post(this.imagesUrl, formData, {
-                headers: new HttpHeaders({
-                    'Authorization': 'Token ' + this.account.token
-                }),
+                headers: new HttpHeaders(this.getTokenHeader()),
                 responseType: 'text'
             })
             .pipe(
@@ -51,9 +67,7 @@ export class ApiService {
     public getImage(id: string): Observable<Image> {
         return this.httpClient
             .get<Image>(this.imageUrl + "/" + id, {
-                headers: new HttpHeaders({
-                    'Authorization': 'Token ' + this.account.token
-                })
+                headers: new HttpHeaders(this.getTokenHeader())
             })
             .pipe(
                 catchError(ApiService.handleError)

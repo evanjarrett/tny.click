@@ -14,12 +14,12 @@ import {
     MatInputModule,
     MatListModule,
     MatMenuModule,
-    MatSnackBarModule,
     MatSidenavModule,
+    MatSnackBarModule,
     MatToolbarModule,
 } from '@angular/material';
-
-import {FileDropModule} from 'ngx-file-drop';
+import {DropzoneModule} from 'ngx-dropzone-wrapper';
+import {FileDropModule} from "ngx-file-drop";
 
 import {AppComponent} from './app.component';
 import {ContentComponent} from './content/content.component';
@@ -32,7 +32,6 @@ import {ApiService} from "./services/api.service";
 
 const appRoutes: Routes = [
     {path: 'image/:id', component: ImagedetailComponent},
-    {path: 'login', component: LoginComponent},
 ];
 
 @NgModule({
@@ -48,6 +47,7 @@ const appRoutes: Routes = [
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
+        DropzoneModule,
         FileDropModule,
         FlexLayoutModule,
         FormsModule,
@@ -77,7 +77,7 @@ const appRoutes: Routes = [
     ],
     providers: [ApiService],
     bootstrap: [AppComponent],
-    entryComponents: [UploadComponent]
+    entryComponents: [UploadComponent, LoginComponent]
 })
 export class AppModule {
 }

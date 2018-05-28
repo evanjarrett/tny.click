@@ -46,9 +46,7 @@ export class LoginComponent implements OnInit {
     }
 
     public onLoginComplete(ret: Account): void {
-        localStorage.setItem("account", JSON.stringify(ret));
         this.zone.run(() => this.dialogRef.close());
-        this.service.hasToken.next(true);
         this.router.navigate(['']);
     }
 
