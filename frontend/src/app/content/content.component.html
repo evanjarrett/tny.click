@@ -12,12 +12,10 @@
 
                 <div class="button-container">
                     <app-login-button></app-login-button>
-                    <button mat-raised-button color="accent" (click)="openDialog()" *ngIf="hasToken">Upload Image
-                    </button>
                 </div>
             </div>
         </header>
-        <app-upload></app-upload>
+        <app-upload *ngIf="hasToken"></app-upload>
 
     </mat-drawer-content>
 </mat-drawer-container>
