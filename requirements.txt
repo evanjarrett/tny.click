@@ -1,5 +1,8 @@
+requests
 Django
 djangorestframework
 django-cors-headers
 pillow
 gunicorn
+mss
+pyside2
