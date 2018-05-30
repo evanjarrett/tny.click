@@ -9,22 +9,21 @@ from mss import mss
 
 
 class TnyClick(QMainWindow):
-    _screenshot = None
-    """
-         Сheckbox and system tray icons.
-         Will initialize in the constructor.
-    """
     _title = "Tny.Click"
+    _screenshot = None
+
     _check_box = None
     _tray_icon = None
     _text_box = None
-
+    _settings = None
 
     # Override the class constructor
     def __init__(self):
         self._screenshot = mss()
         # Be sure to call the super class method
         QMainWindow.__init__(self)
+
+        self._settings = QSettings(self._title, "client")
 
         self.setMinimumSize(QSize(400, 400))
         self.setWindowTitle(self._title)
@@ -33,8 +32,9 @@ class TnyClick(QMainWindow):
         self.setCentralWidget(central_widget)
 
         self._text_box = QLineEdit(self)
+        self._text_box.textChanged.connect(self.on_text_changed)
         self._check_box = QCheckBox('Minimize to Tray', self)
-        self._check_box.setChecked(False)
+        self._check_box.clicked.connect(self.on_minimize_checked)
 
         form_layout = QFormLayout()
         form_layout.addRow("Token", self._text_box)
@@ -42,6 +42,7 @@ class TnyClick(QMainWindow):
 
         central_widget.setLayout(form_layout)
 
+        self.restore_settings()
         self.build_tray()
 
         QShortcut(QKeySequence('Ctrl+Shift+4'), self, self.run)
@@ -60,6 +61,16 @@ class TnyClick(QMainWindow):
         tray_menu.addAction(quit_action)
         self._tray_icon.setContextMenu(tray_menu)
         self._tray_icon.show()
+
+    def restore_settings(self):
+        self._text_box.setText(self._settings.value("token", ""))
+        self._check_box.setChecked(bool(self._settings.value("minimize", False)))
+
+    def on_text_changed(self, text_input):
+        self._settings.setValue("token", text_input)
+
+    def on_minimize_checked(self, checked):
+        self._settings.setValue("minimize", checked)
 
     # The window will be closed only if there is no check mark in the check box
     def closeEvent(self, event):
