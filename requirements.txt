@@ -4,5 +4,9 @@ djangorestframework
 django-cors-headers
 pillow
 gunicorn
-mss
-pyside2
+
+# mss
+# pyside2
+# pyqtkeybind
+pygobject
+pycairo
