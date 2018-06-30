@@ -2,7 +2,7 @@
 
 ## Image uploading service
 
-This is built using Angular 5 and django.
+This is built using Angular 6 and django.
 
 Currently the server only runs in "development" mode 
 where webpack will hot reload angular rather than it being built
