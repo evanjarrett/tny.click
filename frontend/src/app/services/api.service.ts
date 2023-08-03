@@ -66,9 +66,7 @@ export class ApiService {
 
     public getImage(id: string): Observable<Image> {
         return this.httpClient
-            .get<Image>(this.imageUrl + "/" + id, {
-                headers: new HttpHeaders(this.getTokenHeader())
-            })
+            .get<Image>(this.imageUrl + "/" + id)
             .pipe(
                 catchError(ApiService.handleError)
             );

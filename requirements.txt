@@ -8,5 +8,5 @@ gunicorn
 # mss
 # pyside2
 # pyqtkeybind
-pygobject
-pycairo
+# pygobject
+# pycairo
